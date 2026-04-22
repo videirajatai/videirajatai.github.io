@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Igreja Videira de Jataí - Um lugar de fé, amor e esperança. Venha nos visitar! Cultos ao vivo, programações especiais e mensagens que transformam.">
+    <meta name="keywords" content="Igreja Videira, Jataí, Igreja Evangélica, Pastor Germerson Araujo, cultos, fé">
+    <meta name="author" content="Igreja Videira de Jataí">
+    <title>Igreja Videira de Jataí | Fé que floresce</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fefcf5;
+            color: #1e1b2c;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1e9db;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a17c4b;
+            border-radius: 12px;
+        }
+
+        /* Reusable variables */
+        :root {
+            --primary: #7c3a6e;
+            --primary-dark: #562a4d;
+            --secondary: #d9b48b;
+            --accent: #b8724b;
+            --light: #fff9ef;
+            --dark: #2d2a3e;
+            --glass: rgba(255, 247, 235, 0.75);
+            --shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+            --shadow-sm: 0 8px 20px -6px rgba(0, 0, 0, 0.05);
+            --transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        /* Background gradient animated */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(214, 181, 127, 0.08) 0%, rgba(124, 58, 110, 0.03) 90%);
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        /* Header Glass */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            backdrop-filter: blur(14px);
+            background-color: rgba(255, 249, 240, 0.85);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            z-index: 1000;
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(124, 58, 110, 0.15);
+        }
+
+        .header.scrolled {
+            padding: 0.7rem 2rem;
+            background-color: rgba(255, 249, 240, 0.96);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #7c3a6e, #b8724b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+        .logo span {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #8b6b4d;
+            display: block;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #2e2a3a;
+            transition: var(--transition);
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .nav-menu li a:hover {
+            color: #7c3a6e;
+        }
+        .nav-menu li a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, #7c3a6e, #d9b48b);
+            transition: 0.3s;
+        }
+        .nav-menu li a:hover::after {
+            width: 100%;
+        }
+
+        .btn-restrito {
+            background: linear-gradient(110deg, #7c3a6e, #9e5a82);
+            padding: 0.6rem 1.4rem;
+            border-radius: 40px;
+            color: white !important;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 6px 14px rgba(124, 58, 110, 0.25);
+            border: none;
+        }
+        .btn-restrito:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(110deg, #632a56, #8e4b73);
+            box-shadow: 0 12px 22px rgba(124, 58, 110, 0.3);
+            color: white;
+        }
+        .btn-restrito::after {
+            display: none;
+        }
+
+        .mobile-menu-icon {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #7c3a6e;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(115deg, rgba(0,0,0,0.55), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1501618669935-18b6ecb13d6d?q=80&w=2070&auto=format') center/cover no-repeat fixed;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .hero-overlay {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+        .hero-content {
+            max-width: 700px;
+            background: rgba(30, 25, 35, 0.45);
+            backdrop-filter: blur(4px);
+            padding: 2.5rem 2rem;
+            border-radius: 42px;
+            border-left: 6px solid #d9b48b;
+            animation: fadeUp 1s ease-out;
+        }
+        .hero-content h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            color: white;
+            line-height: 1.2;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .hero-content p {
+            font-size: 1.25rem;
+            color: #fef3e2;
+            margin: 1rem 0 1.8rem;
+            font-weight: 400;
+        }
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: white;
+            color: #7c3a6e;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,240,0.5);
+        }
+        .btn-primary:hover {
+            background: #d9b48b;
+            color: #2e1b2c;
+            transform: scale(1.02);
+        }
+        .btn-outline-light {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .btn-outline-light:hover {
+            background: white;
+            color: #7c3a6e;
+        }
+
+        /* Reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s ease, transform 0.7s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section {
+            padding: 5rem 2rem;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(125deg, #562a4d, #b8724b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        .section-sub {
+            color: #6c5a4a;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            border-left: 4px solid #d9b48b;
+            padding-left: 1rem;
+        }
+
+        /* cards */
+        .cards-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .info-card {
+            background: white;
+            border-radius: 36px;
+            padding: 2rem 1.8rem;
+            flex: 1 1 260px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(217, 180, 139, 0.3);
+            backdrop-filter: blur(2px);
+        }
+        .info-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+            border-color: #d9b48b;
+        }
+        .info-card i {
+            font-size: 2.8rem;
+            color: #7c3a6e;
+            margin-bottom: 1rem;
+        }
+        .info-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+        .pastor-card {
+            display: flex;
+            flex-wrap: wrap;
+            background: white;
+            border-radius: 48px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            align-items: center;
+        }
+        .pastor-img {
+            flex: 1;
+            background: linear-gradient(125deg, #dcc9aa, #fff1e0);
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pastor-img i {
+            font-size: 9rem;
+            color: #a17c4b;
+            opacity: 0.6;
+        }
+        .pastor-info {
+            flex: 1.5;
+            padding: 2.5rem;
+        }
+        .pastor-info h3 {
+            font-size: 2rem;
+            color: #3e2a2f;
+        }
+        .versiculo {
+            font-style: italic;
+            background: #fcf5ea;
+            padding: 1.2rem;
+            border-radius: 28px;
+            margin-top: 1.2rem;
+            border-left: 6px solid #b8724b;
+        }
+
+        /* Horarios */
+        .horarios-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .horario-item {
+            background: rgba(255, 245, 235, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            padding: 1.5rem 2rem;
+            width: 240px;
+            text-align: center;
+            transition: 0.2s;
+            border: 1px solid #eadbbe;
+        }
+        .horario-item i {
+            font-size: 2rem;
+            color: #7c3a6e;
+        }
+
+        /* Contato + form */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .contact-info {
+            background: white;
+            border-radius: 32px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .contact-info p {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .social-links a {
+            background: #f1e9db;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 30px;
+            color: #7c3a6e;
+            font-size: 1.5rem;
+            transition: 0.2s;
+            margin-right: 12px;
+        }
+        .social-links a:hover {
+            background: #7c3a6e;
+            color: white;
+            transform: scale(1.05);
+        }
+        .contact-form {
+            background: white;
+            border-radius: 32px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px 16px;
+            margin: 10px 0;
+            border-radius: 48px;
+            border: 1px solid #e6dbcd;
+            font-family: 'Inter', sans-serif;
+            background: #fefaf5;
+        }
+        .contact-form textarea {
+            border-radius: 28px;
+            resize: vertical;
+        }
+        .btn-submit {
+            background: #7c3a6e;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-submit:hover {
+            background: #a15883;
+            transform: scale(0.98);
+        }
+
+        footer {
+            background: #1f1b28;
+            color: #d9cebb;
+            padding: 2rem;
+            text-align: center;
+            border-top-left-radius: 32px;
+            border-top-right-radius: 32px;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: #e2cfb0;
+            text-decoration: none;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        /* Responsive */
+        @media (max-width: 980px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: rgba(255, 249, 235, 0.98);
+                backdrop-filter: blur(20px);
+                width: 80%;
+                height: calc(100vh - 70px);
+                padding: 2rem;
+                transition: 0.3s;
+                box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+                gap: 2rem;
+                z-index: 999;
+                align-items: flex-start;
+            }
+            .nav-menu.active {
+                left: 0;
+            }
+            .mobile-menu-icon {
+                display: block;
+            }
+            .hero-content h1 {
+                font-size: 2.4rem;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .pastor-card {
+                flex-direction: column;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        @media (max-width: 550px) {
+            .hero-content {
+                padding: 1.5rem;
+            }
+            .btn-group {
+                flex-direction: column;
+            }
+            section {
+                padding: 3rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header" id="header">
+    <div class="nav-container">
+        <div class="logo">
+            <h1>VIDEIRA <span>de Jataí</span></h1>
+        </div>
+        <div class="mobile-menu-icon" id="mobileMenuIcon">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#home">Início</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#horarios">Horários</a></li>
+            <li><a href="#contato">Contato</a></li>
+            <li><a href="https://videirajatai.com.br/sistema" target="_blank" class="btn-restrito"><i class="fas fa-lock" style="margin-right: 8px;"></i> Área Restrita</a></li>
+        </ul>
+    </div>
+</header>
+
+<main>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1>Fé que floresce <br>como videira frutífera</h1>
+                <p>Seja bem-vindo à Igreja Videira de Jataí – um lar de esperança, amor e transformação. Junte-se a nós e experimente a presença de Deus de forma viva e atual.</p>
+                <div class="btn-group">
+                    <a href="#horarios" class="btn-primary">Nossos Cultos</a>
+                    <a href="https://instagram.com/videirajatai" target="_blank" class="btn-outline-light"><i class="fab fa-instagram"></i> Acompanhe</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre + Pastor -->
+    <section id="sobre">
+        <div class="container">
+            <h2 class="section-title reveal">Sobre a Videira</h2>
+            <div class="section-sub reveal">Uma igreja que acolhe, transforma e espalha o amor de Cristo.</div>
+            <div class="pastor-card reveal">
+                <div class="pastor-img">
+                    <i class="fas fa-church"></i>
+                </div>
+                <div class="pastor-info">
+                    <h3>Pr. Germerson Araujo</h3>
+                    <p>Pastor presidente e fundador da Igreja Videira de Jataí, com mais de 15 anos de ministério, dedicado a anunciar a Palavra com paixão e relevância. Sua liderança é marcada pelo amor ao próximo e pela visão de uma igreja que impacta a cidade.</p>
+                    <div class="versiculo">
+                        <i class="fas fa-quote-left"></i> "Eu sou a videira verdadeira, e meu Pai é o agricultor. Todo ramo que, estando em mim, não dá fruto, ele corta; e todo que dá fruto ele poda, para que dê mais fruto ainda." — João 15:1-2
+                    </div>
+                </div>
+            </div>
+            <div class="cards-grid" style="margin-top: 3rem;">
+                <div class="info-card reveal">
+                    <i class="fas fa-heart"></i>
+                    <h3>Missão</h3>
+                    <p>Proclamar o evangelho, discipular e servir a comunidade com amor e integridade.</p>
+                </div>
+                <div class="info-card reveal">
+                    <i class="fas fa-eye"></i>
+                    <h3>Visão</h3>
+                    <p>Ser referência em Jataí como igreja relevante, acolhedora e vibrante na fé.</p>
+                </div>
+                <div class="info-card reveal">
+                    <i class="fas fa-hands-helping"></i>
+                    <h3>Valores</h3>
+                    <p>Unidade, adoração genuína, compaixão e transparência no servir.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Horários -->
+    <section id="horarios" style="background: linear-gradient(145deg, #fdf7ef, #fffcf5);">
+        <div class="container">
+            <h2 class="section-title reveal">Programação Semanal</h2>
+            <div class="section-sub reveal">Venha adorar conosco. Todos são bem-vindos!</div>
+            <div class="horarios-wrapper reveal">
+                <div class="horario-item"><i class="fas fa-calendar-alt"></i> <h3>Domingo</h3> <strong>Culto da Família</strong><br>19h</div>
+                <div class="horario-item"><i class="fas fa-calendar-week"></i> <h3>Quarta-feira</h3> <strong>Escola Bíblica & Oração</strong><br>19h30</div>
+                <div class="horario-item"><i class="fas fa-users"></i> <h3>Sábado</h3> <strong>Jovens e Adolescentes</strong><br>18h</div>
+                <div class="horario-item"><i class="fas fa-praying-hands"></i> <h3>Oração</h3> <strong>Manhã de Intercessão</strong><br>Quinta 9h</div>
+            </div>
+            <div class="reveal" style="text-align: center; margin-top: 2rem;">
+                <p><i class="fas fa-map-marker-alt"></i> Av. Veriano de Oliveira Lima, 1067 - Santa Maria, Jataí - GO</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato + Mapa + Instagram -->
+    <section id="contato">
+        <div class="container">
+            <h2 class="section-title reveal">Entre em contato</h2>
+            <div class="section-sub reveal">Estamos prontos para te acolher, tirar dúvidas e orar por você.</div>
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <h3><i class="fas fa-map-pin"></i> Endereço</h3>
+                    <p><i class="fas fa-location-dot"></i> Av. Veriano de Oliveira Lima, 1067, Santa Maria, Jataí - GO, CEP 75800-000</p>
+                    <p><i class="fas fa-phone-alt"></i> (64) 99999-1234 (WhatsApp)</p>
+                    <p><i class="fas fa-envelope"></i> contato@videirajatai.com.br</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/videirajatai" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Av.+Veriano+de+Oliveira+Lima,+1067,+Jataí" target="_blank" class="btn-primary" style="background: #7c3a6e; color:white; display:inline-block; margin-top: 10px;"><i class="fas fa-directions"></i> Abrir no mapa</a>
+                    </div>
+                </div>
+                <div class="contact-form reveal">
+                    <h3>Envie sua mensagem</h3>
+                    <form id="contactForm">
+                        <input type="text" placeholder="Seu nome" id="nome" required>
+                        <input type="email" placeholder="Seu e-mail" id="email" required>
+                        <textarea rows="4" placeholder="Mensagem ou pedido de oração" id="msg"></textarea>
+                        <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Enviar mensagem</button>
+                    </form>
+                    <p style="font-size: 0.8rem; margin-top: 12px; color:#987b60;">*Em breve nossa equipe retornará com muito amor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-links">
+        <a href="#home">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#horarios">Horários</a>
+        <a href="#contato">Contato</a>
+        <a href="https://videirajatai.com.br/sistema" target="_blank"><i class="fas fa-user-lock"></i> Área do Membro</a>
+    </div>
+    <p>© 2025 Igreja Videira de Jataí | Pastor Germerson Araujo | Todos os direitos reservados.</p>
+    <p style="margin-top: 8px; font-size: 0.85rem;">Siga-nos no Instagram <strong>@videirajatai</strong> | Av. Veriano de Oliveira Lima, 1067</p>
+</footer>
+
+<script>
+    // Mobile menu toggle
+    const mobileIcon = document.getElementById('mobileMenuIcon');
+    const navMenu = document.getElementById('navMenu');
+    mobileIcon.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        const icon = mobileIcon.querySelector('i');
+        if(navMenu.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+
+    // Fechar menu ao clicar em link (mobile)
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            if(window.innerWidth <= 980) {
+                navMenu.classList.remove('active');
+                mobileIcon.querySelector('i').classList.remove('fa-times');
+                mobileIcon.querySelector('i').classList.add('fa-bars');
+            }
+        });
+    });
+
+    // Scroll effect header + active link highlight
+    const header = document.getElementById('header');
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-menu li a');
+
+    window.addEventListener('scroll', () => {
+        if(window.scrollY > 20) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+        // active link
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if(scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if(link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+                link.style.fontWeight = '700';
+                link.style.color = '#7c3a6e';
+            } else if(!link.classList.contains('btn-restrito')) {
+                link.style.fontWeight = '500';
+                link.style.color = '#2e2a3a';
+            }
+        });
+    });
+
+    // Intersection Observer for Reveal animations
+    const revealElements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: "0px 0px -20px 0px" });
+    revealElements.forEach(el => observer.observe(el));
+
+    // Form submit alert (demonstração)
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert(`🙏 Obrigado, ${document.getElementById('nome').value || 'visitante'}! Sua mensagem foi enviada com sucesso. Em breve entraremos em contato. Deus abençoe!`);
+        form.reset();
+    });
+
+    // Smooth scroll para âncoras
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if(targetId === "#" || targetId === "") return;
+            const targetElement = document.querySelector(targetId);
+            if(targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+</body>
+</html>
