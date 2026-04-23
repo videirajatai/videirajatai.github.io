@@ -3,22 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Igreja Videira de Jataí - Um lugar de fé, amor e esperança. Venha nos visitar! Cultos ao vivo, programações especiais e mensagens que transformam.">
-    <meta name="keywords" content="Igreja Videira, Jataí, Igreja Evangélica, Pastor Germerson Araujo, cultos, fé">
-    <meta name="author" content="Igreja Videira de Jataí">
-
-    <link rel="icon" type="image/png" href="logo.png">
-    <link rel="shortcut icon" type="image/png" href="logo.png">
-    <link rel="apple-touch-icon" href="logo.png">
-
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Igreja Videira Jataí">
-    <meta name="apple-mobile-web-app-title" content="Igreja Videira Jataí">
-    <meta name="theme-color" content="#0f172a"> 
-    <link rel="manifest" href="manifest.json">
-
-    
+    <meta name="description" content="Igreja Videira de Jataí - Um lugar de fé, amor e esperança. Participe dos nossos cultos, contribua com suas ofertas e viva um encontro com Deus.">
+    <meta name="keywords" content="Igreja Videira, Jataí, Pastor Germerson Araujo, ofertas online, PIX, Encontro com Deus">
     <title>Igreja Videira de Jataí | Fé que floresce</title>
     
     <!-- Fonts & Icons -->
@@ -87,7 +73,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 1rem 2rem;
+            padding: 0.8rem 2rem;
             backdrop-filter: blur(14px);
             background-color: rgba(255, 249, 240, 0.85);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
@@ -97,7 +83,7 @@
         }
 
         .header.scrolled {
-            padding: 0.7rem 2rem;
+            padding: 0.5rem 2rem;
             background-color: rgba(255, 249, 240, 0.96);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
         }
@@ -111,8 +97,18 @@
             flex-wrap: wrap;
         }
 
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo img {
+            height: 48px;
+            width: auto;
+            transition: var(--transition);
+        }
         .logo h1 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 700;
             background: linear-gradient(135deg, #7c3a6e, #b8724b);
             -webkit-background-clip: text;
@@ -121,7 +117,7 @@
             letter-spacing: -0.3px;
         }
         .logo span {
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             font-weight: 500;
             color: #8b6b4d;
             display: block;
@@ -259,6 +255,18 @@
             background: white;
             color: #7c3a6e;
         }
+        .btn-encontro {
+            background: linear-gradient(95deg, #d9b48b, #b8724b);
+            color: #2d1e2c;
+            border: none;
+            font-weight: bold;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+        }
+        .btn-encontro:hover {
+            background: linear-gradient(95deg, #c9a070, #a5613a);
+            transform: scale(1.02);
+            color: white;
+        }
 
         /* Reveal animations */
         .reveal {
@@ -387,6 +395,102 @@
         .horario-item i {
             font-size: 2rem;
             color: #7c3a6e;
+        }
+
+        /* Ofertas section - QR Code e PIX */
+        .ofertas-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 48px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+        .qrcode-area {
+            flex: 1;
+            text-align: center;
+            background: #fcf6ed;
+            padding: 1.5rem;
+            border-radius: 32px;
+        }
+        .qrcode-area img {
+            max-width: 200px;
+            width: 100%;
+            background: white;
+            padding: 12px;
+            border-radius: 28px;
+            box-shadow: 0 12px 22px rgba(0,0,0,0.1);
+        }
+        .pix-info {
+            flex: 1;
+            padding: 1rem;
+        }
+        .pix-info h3 {
+            font-size: 1.8rem;
+            color: #7c3a6e;
+        }
+        .pix-chave {
+            background: #f1e9db;
+            padding: 0.8rem;
+            border-radius: 60px;
+            display: inline-block;
+            font-family: monospace;
+            font-size: 1rem;
+            word-break: break-all;
+            margin-top: 1rem;
+        }
+        .btn-copy {
+            background: #7c3a6e;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            margin-left: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-copy:hover {
+            background: #a15883;
+        }
+
+        /* Encontro com Deus - Destaque especial */
+        .encontro-destaque {
+            background: linear-gradient(125deg, #7c3a6e, #b8724b);
+            border-radius: 60px;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: white;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 35px -10px rgba(124,58,110,0.3);
+        }
+        .encontro-destaque h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+        .encontro-destaque p {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+        }
+        .btn-encontro-grande {
+            background: white;
+            color: #7c3a6e;
+            padding: 1rem 2.2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: inline-block;
+            transition: 0.2s;
+            text-decoration: none;
+            margin-top: 0.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .btn-encontro-grande:hover {
+            transform: scale(1.03);
+            background: #fef2e0;
         }
 
         /* Contato + form */
@@ -520,6 +624,9 @@
             .section-title {
                 font-size: 2rem;
             }
+            .ofertas-grid {
+                flex-direction: column;
+            }
         }
         @media (max-width: 550px) {
             .hero-content {
@@ -531,6 +638,9 @@
             section {
                 padding: 3rem 1.2rem;
             }
+            .encontro-destaque h2 {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
@@ -539,7 +649,10 @@
 <header class="header" id="header">
     <div class="nav-container">
         <div class="logo">
-            <h1>VIDEIRA <span>de Jataí</span></h1>
+            <img src="logo.png" alt="Logo Videira" onerror="this.src='https://placehold.co/60x60?text=VIDEIRA'; this.onerror=null;">
+            <div>
+                <h1>VIDEIRA <span>de Jataí</span></h1>
+            </div>
         </div>
         <div class="mobile-menu-icon" id="mobileMenuIcon">
             <i class="fas fa-bars"></i>
@@ -548,6 +661,7 @@
             <li><a href="#home">Início</a></li>
             <li><a href="#sobre">Sobre</a></li>
             <li><a href="#horarios">Horários</a></li>
+            <li><a href="#ofertas">Ofertas</a></li>
             <li><a href="#contato">Contato</a></li>
             <li><a href="https://videirajatai.com.br/sistema" target="_blank" class="btn-restrito"><i class="fas fa-lock" style="margin-right: 8px;"></i> Área Restrita</a></li>
         </ul>
@@ -560,10 +674,11 @@
         <div class="hero-overlay">
             <div class="hero-content">
                 <h1>Fé que floresce <br>como videira frutífera</h1>
-                <p>Seja bem-vindo à Igreja Videira de Jataí – um lar de esperança, amor e transformação. Junte-se a nós e experimente a presença de Deus de forma viva e atual.</p>
+                <p>Seja bem-vindo à Igreja Videira de Jataí</p>
                 <div class="btn-group">
                     <a href="#horarios" class="btn-primary">Nossos Cultos</a>
                     <a href="https://instagram.com/videirajatai" target="_blank" class="btn-outline-light"><i class="fab fa-instagram"></i> Acompanhe</a>
+                    <a href="https://www.videirajatai.com.br/encontrocomdeus" target="_blank" class="btn-primary btn-encontro"><i class="fas fa-heart"></i> Encontro com Deus</a>
                 </div>
             </div>
         </div>
@@ -579,7 +694,7 @@
                     <i class="fas fa-church"></i>
                 </div>
                 <div class="pastor-info">
-                    <h3>Visão</h3>
+                    <h3>NOSSA VISÃO</h3>
                     <p>Nosso encargo é edificar uma igreja de vencedores, onde cada membro é um ministro, cada casa uma extenção da igreja. Alcançando assim, nossa geração pra Cristo através das células que se multiplicam.</p>
                     <div class="versiculo">
                         <i class="fas fa-quote-left"></i> "Eu sou a videira verdadeira, e meu Pai é o agricultor. Todo ramo que, estando em mim, não dá fruto, ele corta; e todo que dá fruto ele poda, para que dê mais fruto ainda." — João 15:1-2
@@ -612,7 +727,7 @@
             <h2 class="section-title reveal">Programação Semanal</h2>
             <div class="section-sub reveal">Venha adorar conosco. Todos são bem-vindos!</div>
             <div class="horarios-wrapper reveal">
-                <div class="horario-item"><i class="fas fa-calendar-alt"></i> <h3>Domingo</h3> <strong>Culto da Família</strong><br>18h</div>
+                <div class="horario-item"><i class="fas fa-calendar-alt"></i> <h3>Todo Domingo</h3> <strong>Culto da Família</strong><br>18h</div>
                 <!--<div class="horario-item"><i class="fas fa-calendar-week"></i> <h3>Quarta-feira</h3> <strong>Escola Bíblica & Oração</strong><br>19h30</div>
                 <div class="horario-item"><i class="fas fa-users"></i> <h3>Sábado</h3> <strong>Jovens e Adolescentes</strong><br>18h</div>
                 <div class="horario-item"><i class="fas fa-praying-hands"></i> <h3>Oração</h3> <strong>Manhã de Intercessão</strong><br>Quinta 9h</div>-->
@@ -622,6 +737,41 @@
             </div>
         </div>
     </section>
+
+    <!-- SEÇÃO OFERTAS (PIX + QR Code) -->
+    <section id="ofertas">
+        <div class="container">
+            <h2 class="section-title reveal">Contribua com alegria</h2>
+            <div class="section-sub reveal">Sua oferta ajuda a levar esperança e transformar vidas.</div>
+            <div class="ofertas-grid reveal">
+                <div class="qrcode-area">
+                    <h3><i class="fas fa-qrcode"></i> QR Code PIX</h3>
+                    <img src="pix.png" alt="QR Code PIX Igreja Videira" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=00020126360014br.gov.bcb.pix011727.105.498/0001-0352040005303986540413.005802BR5917IGREJA VIDEIRA6005JATAI62140509OFERTA6304E1A0'; this.onerror=null;">
+                    <p style="margin-top: 12px;">Aponte a câmera do celular</p>
+                </div>
+                <div class="pix-info">
+                    <h3><i class="fas fa-money-bill-wave"></i> PIX com CNPJ</h3>
+                    <p><strong>Chave PIX (CNPJ):</strong></p>
+                    <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <span class="pix-chave" id="pixChave">27.105.498/0001-03</span>
+                        <button class="btn-copy" onclick="copiarChave()"><i class="fas fa-copy"></i> Copiar</button>
+                    </div>
+                    <p style="margin-top: 1.5rem;">Qualquer valor é bem-vindo. Deus ama quem contribui com alegria!</p>
+                    <small>✔️ Seguro e rápido via PIX. Ofertas para manutenção da obra e ações sociais.</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENCONTRO COM DEUS - DESTAQUE ESPECIAL -->
+    <div class="container reveal">
+        <div class="encontro-destaque">
+            <h2><i class="fas fa-hands-praying"></i> Encontro com Deus</h2>
+            <p>Uma experiência única de renovação espiritual e propósito. Inscreva-se agora e viva dias de transformação!</p>
+            <a href="https://www.videirajatai.com.br/encontrocomdeus" target="_blank" class="btn-encontro-grande">QUERO PARTICIPAR →</a>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">www.videirajatai.com.br/encontrocomdeus</p>
+        </div>
+    </div>
 
     <!-- Contato + Mapa + Instagram -->
     <section id="contato">
@@ -637,7 +787,7 @@
                     <div class="social-links">
                         <a href="https://instagram.com/videirajatai" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                         <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.youtube.com/@videirajatai" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                     </div>
                     <div style="margin-top: 1.5rem;">
                         <a href="https://www.google.com/maps/search/?api=1&query=Av.+Veriano+de+Oliveira+Lima,+1067,+Jataí" target="_blank" class="btn-primary" style="background: #7c3a6e; color:white; display:inline-block; margin-top: 10px;"><i class="fas fa-directions"></i> Abrir no mapa</a>
@@ -663,6 +813,7 @@
         <a href="#home">Início</a>
         <a href="#sobre">Sobre</a>
         <a href="#horarios">Horários</a>
+        <a href="#ofertas">Ofertas</a>
         <a href="#contato">Contato</a>
         <a href="https://videirajatai.com.br/sistema" target="_blank"><i class="fas fa-user-lock"></i> Área do Membro</a>
     </div>
@@ -686,7 +837,6 @@
         }
     });
 
-    // Fechar menu ao clicar em link (mobile)
     document.querySelectorAll('.nav-menu a').forEach(link => {
         link.addEventListener('click', () => {
             if(window.innerWidth <= 980) {
@@ -697,39 +847,17 @@
         });
     });
 
-    // Scroll effect header + active link highlight
+    // Scroll effect header
     const header = document.getElementById('header');
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-menu li a');
-
     window.addEventListener('scroll', () => {
         if(window.scrollY > 20) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
-        // active link
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 100;
-            if(scrollY >= sectionTop) {
-                current = section.getAttribute('id');
-            }
-        });
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if(link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
-                link.style.fontWeight = '700';
-                link.style.color = '#7c3a6e';
-            } else if(!link.classList.contains('btn-restrito')) {
-                link.style.fontWeight = '500';
-                link.style.color = '#2e2a3a';
-            }
-        });
     });
 
-    // Intersection Observer for Reveal animations
+    // Reveal animation observer
     const revealElements = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -741,15 +869,15 @@
     }, { threshold: 0.15, rootMargin: "0px 0px -20px 0px" });
     revealElements.forEach(el => observer.observe(el));
 
-    // Form submit alert (demonstração)
+    // Form submit
     const form = document.getElementById('contactForm');
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        alert(`🙏 Obrigado, ${document.getElementById('nome').value || 'visitante'}! Sua mensagem foi enviada com sucesso. Em breve entraremos em contato. Deus abençoe!`);
+        alert(`🙏 Obrigado, ${document.getElementById('nome').value || 'visitante'}! Sua mensagem foi enviada. Deus abençoe!`);
         form.reset();
     });
 
-    // Smooth scroll para âncoras
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
@@ -761,6 +889,16 @@
             }
         });
     });
+
+    // Função copiar chave PIX
+    window.copiarChave = function() {
+        const chave = document.getElementById('pixChave').innerText;
+        navigator.clipboard.writeText(chave).then(() => {
+            alert('Chave PIX copiada: ' + chave);
+        }).catch(() => {
+            alert('Copie manualmente: ' + chave);
+        });
+    };
 </script>
 </body>
 </html>
