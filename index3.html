@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Videira Jataí | Escuro & Sofisticado</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0E0C15;
+      font-family: 'Inter', sans-serif;
+      color: #E8E6F0;
+      scroll-behavior: smooth;
+    }
+
+    /* Paleta escura moderna */
+    :root {
+      --dark-bg: #0E0C15;
+      --card-bg: #1A1825;
+      --primary: #B87333;    /* cobre / vinho terroso */
+      --primary-light: #D68B5C;
+      --secondary: #2A2A3E;
+      --accent: #A0D6B4;      /* verde suave para detalhes */
+      --border-dim: #2C2836;
+      --shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.5);
+      --transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1E1C2A;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 10px;
+    }
+
+    /* Header escuro */
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1rem 2rem;
+      background: rgba(14, 12, 21, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(184, 115, 51, 0.2);
+    }
+    .nav-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo img {
+      height: 44px;
+      filter: brightness(0) invert(1) sepia(1) hue-rotate(320deg) saturate(5);
+    }
+    .logo h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #f0ede8;
+      letter-spacing: -0.5px;
+    }
+    .logo span {
+      font-size: 0.7rem;
+      color: var(--primary);
+    }
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-menu a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #CCC8E0;
+      transition: 0.2s;
+    }
+    .nav-menu a:hover {
+      color: var(--primary);
+    }
+    .btn-restrito {
+      background: var(--primary);
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      color: #0E0C15 !important;
+      font-weight: 600;
+    }
+    .mobile-menu-icon {
+      display: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: #CCC8E0;
+    }
+
+    /* Hero com cards empilhados */
+    .hero-stack {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 5% 4rem;
+      background: radial-gradient(circle at 70% 20%, #1E1A2F, #0E0C15);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .hero-text h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #FFF, var(--primary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-text p {
+      margin: 1.5rem 0;
+      color: #B8B4D4;
+      font-size: 1.1rem;
+    }
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--primary);
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      color: #0E0C15;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .btn-outline {
+      border: 1.5px solid var(--primary);
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      color: #E8E6F0;
+      text-decoration: none;
+    }
+
+    /* Cards empilhados com animação (um atrás do outro) */
+    .card-stack {
+      position: relative;
+      height: 320px;
+      width: 100%;
+      max-width: 380px;
+      margin-left: auto;
+    }
+    .stack-card {
+      position: absolute;
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: 28px;
+      padding: 1.5rem;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(184,115,51,0.2);
+      box-shadow: 0 20px 30px -12px black;
+      transition: transform 0.5s ease, opacity 0.4s;
+      cursor: pointer;
+    }
+    .stack-card:nth-child(1) {
+      z-index: 3;
+      transform: translateX(0px) translateY(0px) scale(1);
+      opacity: 1;
+    }
+    .stack-card:nth-child(2) {
+      z-index: 2;
+      transform: translateX(12px) translateY(20px) scale(0.96);
+      opacity: 0.85;
+    }
+    .stack-card:nth-child(3) {
+      z-index: 1;
+      transform: translateX(24px) translateY(40px) scale(0.92);
+      opacity: 0.7;
+    }
+    .stack-card.active-front {
+      transform: translateX(0) translateY(0) scale(1);
+      opacity: 1;
+      z-index: 3;
+    }
+    .stack-card h3 {
+      color: var(--primary);
+      margin-bottom: 0.8rem;
+    }
+    .stack-card p {
+      font-size: 0.9rem;
+      color: #B8B4D4;
+    }
+    .card-indicators {
+      position: absolute;
+      bottom: -35px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      z-index: 5;
+    }
+    .indicator-dot {
+      width: 8px;
+      height: 8px;
+      background: #4a4568;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .indicator-dot.active {
+      background: var(--primary);
+      width: 24px;
+      border-radius: 10px;
+    }
+
+    /* Seções escuras */
+    section {
+      padding: 5rem 2rem;
+      background: #0E0C15;
+    }
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--primary);
+      padding-left: 1rem;
+      color: #F0EDE8;
+    }
+    .section-sub {
+      color: #9A96B5;
+      margin-bottom: 3rem;
+      font-size: 1rem;
+    }
+
+    /* Cards de missão / visão */
+    .cards-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .info-card {
+      background: var(--card-bg);
+      border-radius: 28px;
+      padding: 2rem;
+      flex: 1 1 260px;
+      text-align: center;
+      border: 1px solid #2A2738;
+      transition: var(--transition);
+    }
+    .info-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-5px);
+    }
+    .info-card i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* Cultos destaque */
+    .cultos-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .card-destaque {
+      background: var(--card-bg);
+      border-radius: 32px;
+      padding: 1.8rem;
+      flex: 1 1 280px;
+      border: 1px solid #2C2836;
+      transition: 0.25s;
+    }
+    .card-destaque:hover {
+      border-color: var(--primary);
+    }
+    .destaque-titulo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-light);
+    }
+
+    /* Células */
+    .cells-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .cell-card {
+      background: var(--card-bg);
+      border-radius: 28px;
+      padding: 1.5rem;
+      width: 280px;
+      position: relative;
+      border: 1px solid #2E2A3C;
+      transition: 0.2s;
+    }
+    .cell-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+    }
+    .cell-wp-icon {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #25D366;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    .cell-day {
+      background: rgba(184,115,51,0.2);
+      display: inline-block;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+    .cell-sector {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0.5rem 0;
+      color: var(--primary-light);
+    }
+
+    /* Ofertas */
+    .ofertas-panel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      background: var(--card-bg);
+      border-radius: 48px;
+      padding: 2rem;
+      align-items: center;
+    }
+    .qr-area {
+      flex: 1;
+      text-align: center;
+    }
+    .qr-area img {
+      max-width: 180px;
+      border-radius: 28px;
+    }
+    .pix-chave {
+      background: #252131;
+      padding: 0.5rem 1rem;
+      border-radius: 60px;
+      font-family: monospace;
+      display: inline-block;
+    }
+    .btn-copy {
+      background: var(--primary);
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+      color: #0E0C15;
+      cursor: pointer;
+    }
+
+    /* Encontro Cards */
+    .encontro-card {
+      background: linear-gradient(115deg, #1E1A2F, #0E0C15);
+      border-radius: 48px;
+      padding: 3rem;
+      text-align: center;
+      border: 1px solid var(--primary);
+      margin: 2rem 0;
+    }
+
+    /* Contato */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .contact-info, .contact-form {
+      background: var(--card-bg);
+      border-radius: 32px;
+      padding: 2rem;
+    }
+    footer {
+      background: #090712;
+      text-align: center;
+      padding: 2rem;
+    }
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: #0E0C15;
+        width: 70%;
+        padding: 2rem;
+        transition: 0.3s;
+        border: 1px solid #2C2836;
+      }
+      .nav-menu.active {
+        left: 5%;
+      }
+      .mobile-menu-icon {
+        display: block;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .card-stack {
+        margin: 2rem auto;
+      }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: 0.6s;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    button, a {
+      transition: 0.2s;
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="nav-container">
+    <div class="logo">
+      <img src="logo.png" alt="Logo" onerror="this.src='https://placehold.co/60x60?text=V'">
+      <h1>VIDEIRA <span>JATAÍ</span></h1>
+    </div>
+    <div class="mobile-menu-icon" id="mobileMenuIcon">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="#home">Início</a></li>
+      <li><a href="#sobre">Visão</a></li>
+      <li><a href="#cultos">Cultos</a></li>
+      <li><a href="#celulas">Células</a></li>
+      <li><a href="#ofertas">Ofertas</a></li>
+      <li><a href="#contato">Contato</a></li>
+      <li><a href="https://videirajatai.com.br/sistema" target="_blank" class="btn-restrito">Área Restrita</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <!-- Hero com cards empilhados -->
+  <section id="home" class="hero-stack">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <h1>Fé que floresce<br>em cada encontro</h1>
+        <p>Comunidade de propósito, células acolhedoras e uma Igreja que transforma.</p>
+        <div class="btn-group">
+          <a href="#cultos" class="btn-primary">Agenda semanal</a>
+          <a href="#celulas" class="btn-outline">Células perto de você</a>
+        </div>
+      </div>
+      <div class="card-stack" id="cardStack">
+        <div class="stack-card" data-index="0">
+          <h3><i class="fas fa-church"></i> Próximo Culto</h3>
+          <p><strong>Domingo 18h</strong> – Culto de Celebração</p>
+          <p>Local: Av. Veriano de Oliveira Lima, 1067</p>
+          <small style="color:var(--primary);">Tema: Renovação da Esperança</small>
+        </div>
+        <div class="stack-card" data-index="1">
+          <h3><i class="fas fa-hands-praying"></i> Encontro com Deus</h3>
+          <p>Inscrições abertas para a próxima turma.</p>
+          <p>Datas: 15 a 17 de Maio</p>
+          <small>Vagas limitadas – garanta sua vaga.</small>
+        </div>
+        <div class="stack-card" data-index="2">
+          <h3><i class="fas fa-users"></i> Célula de Jovens</h3>
+          <p>Radicais Livres – toda terça 19h30</p>
+          <p>Local: Av. Veriano de Oliveira Lima, 1067</p>
+          <small>Convide um amigo!</small>
+        </div>
+        <div class="card-indicators" id="stackIndicators"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre -->
+  <section id="sobre">
+    <div class="container">
+      <h2 class="section-title reveal">Sobre a Videira</h2>
+      <div class="section-sub reveal">Igreja que acolhe, discipula e envia</div>
+      <div class="cards-grid">
+        <div class="info-card reveal"><i class="fas fa-heart"></i><h3>Missão</h3><p>Ganhar, consolidar, discipular, treinar e enviar.</p></div>
+        <div class="info-card reveal"><i class="fas fa-eye"></i><h3>Visão</h3><p>Edificar uma igreja de vencedores, cada membro um ministro.</p></div>
+        <div class="info-card reveal"><i class="fas fa-hands-helping"></i><h3>Valores</h3><p>Unidade, adoração genuína, compaixão e transparência.</p></div>
+      </div>
+      <div class="pastor-card" style="background: var(--card-bg); border-radius: 36px; padding: 2rem; margin-top: 2rem;">
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;">
+          <div style="flex:1; text-align: center;"><i class="fas fa-church" style="font-size: 4rem; color: var(--primary);"></i></div>
+          <div style="flex:3;">
+            <h3 style="color: var(--primary-light);">NOSSA VISÃO</h3>
+            <p>Nosso encargo é edificar uma igreja de vencedores, onde cada membro é um ministro, cada casa uma extensão da igreja. Alcançando assim, nossa geração pra Cristo através das células que se multiplicam.</p>
+            <div style="background: #1A1825; padding: 1rem; border-radius: 28px; margin-top: 1rem;">
+              <i class="fas fa-quote-left"></i> Atos 2:46,47 — "Todos os dias acrescentava o Senhor à igreja aqueles que se haviam de salvar."
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cultos -->
+  <section id="cultos" style="background: #0C0A13;">
+    <div class="container">
+      <h2 class="section-title reveal">Cultos Semanais</h2>
+      <div class="section-sub reveal">Venha celebrar conosco</div>
+      <div class="cultos-wrapper">
+        <div class="card-destaque">
+          <div class="destaque-titulo">Culto de Celebração</div>
+          <div><i class="fas fa-calendar-alt"></i> Domingo 18h</div>
+          <div><i class="fas fa-map-marker-alt"></i> Av. Veriano de Oliveira Lima, 1067</div>
+        </div>
+        <div class="card-destaque">
+          <div class="destaque-titulo">Culto KIDS</div>
+          <div><i class="fas fa-child"></i> Domingo 18h (mesmo horário)</div>
+          <div><i class="fas fa-map-pin"></i> Espaço kids no mesmo endereço</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Células -->
+  <section id="celulas">
+    <div class="container">
+      <h2 class="section-title reveal">Células de Crescimento</h2>
+      <div class="section-sub reveal">Encontre sua célula perto de você</div>
+      <div id="cellsContainer" class="cells-grid">
+        <div><i class="fas fa-spinner fa-pulse"></i> Carregando células...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ofertas PIX -->
+  <section id="ofertas">
+    <div class="container">
+      <h2 class="section-title reveal">Contribua com alegria</h2>
+      <div class="section-sub reveal">Sua oferta transforma vidas</div>
+      <div class="ofertas-panel">
+        <div class="qr-area">
+          <h3><i class="fas fa-qrcode"></i> PIX QR Code</h3>
+          <img src="pix.png" alt="QR Code" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=00020126360014br.gov.bcb.pix011727.105.498/0001-03'">
+        </div>
+        <div>
+          <h3>Chave PIX (CNPJ)</h3>
+          <p><strong class="pix-chave">27.105.498/0001-03</strong></p>
+          <button class="btn-copy" onclick="copiarChave()">Copiar chave</button>
+          <p style="margin-top: 1rem;">Qualquer valor é bem-vindo. Deus ama quem contribui com alegria!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Encontro com Deus -->
+  <div class="container">
+    <div class="encontro-card">
+      <h2><i class="fas fa-hands-praying"></i> Encontro com Deus</h2>
+      <p>Renove sua fé, viva dias de transformação. Inscreva-se agora!</p>
+      <a href="https://www.videirajatai.com.br/encontrocomdeus" target="_blank" class="btn-primary" style="display: inline-block; margin-top: 1rem;">QUERO PARTICIPAR →</a>
+    </div>
+  </div>
+
+  <!-- Contato -->
+  <section id="contato">
+    <div class="container">
+      <h2 class="section-title reveal">Entre em contato</h2>
+      <div class="section-sub reveal">Estamos prontos para acolher você</div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p><i class="fas fa-map-marker-alt"></i> Av. Veriano de Oliveira Lima, 1067, Santa Maria, Jataí - GO</p>
+          <p><i class="fab fa-whatsapp"></i> (62) 99623-1730</p>
+          <p><i class="fas fa-envelope"></i> videirajatai01@gmail.com</p>
+          <div style="margin: 1rem 0;">
+            <a href="https://instagram.com/videirajatai" target="_blank" style="color: var(--primary); font-size: 1.8rem; margin-right: 1rem;"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@videirajatai" target="_blank" style="color: var(--primary); font-size: 1.8rem;"><i class="fab fa-youtube"></i></a>
+          </div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Av.+Veriano+de+Oliveira+Lima,+1067,+Jataí" target="_blank" class="btn-outline">Abrir mapa</a>
+        </div>
+        <div class="contact-form">
+          <form id="contactForm">
+            <input type="text" placeholder="Seu nome" id="nome" style="width:100%; padding:12px; margin:10px 0; background:#1A1825; border:1px solid #342F45; border-radius: 30px; color:white;">
+            <input type="email" placeholder="Seu e-mail" id="email" style="width:100%; padding:12px; margin:10px 0; background:#1A1825; border:1px solid #342F45; border-radius: 30px; color:white;">
+            <textarea rows="4" placeholder="Mensagem ou pedido de oração" id="msg" style="width:100%; padding:12px; border-radius: 28px; background:#1A1825; border:1px solid #342F45; color:white;"></textarea>
+            <button type="submit" class="btn-primary" style="border:none; cursor:pointer;">Enviar mensagem</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="#home">Início</a> | <a href="#sobre">Sobre</a> | <a href="#cultos">Cultos</a> | <a href="#celulas">Células</a> | <a href="#ofertas">Ofertas</a> | <a href="https://videirajatai.com.br/sistema">Área do Membro</a>
+  </div>
+  <p>© 2026 Igreja Videira de Jataí | Pastor Germerson Araujo</p>
+  <p>@videirajatai | Av. Veriano de Oliveira Lima, 1067</p>
+</footer>
+
+<script>
+  // ----- Cards empilhados com efeito de revezamento (um atrás do outro) -----
+  const stackContainer = document.getElementById('cardStack');
+  const cards = document.querySelectorAll('.stack-card');
+  const indicatorsContainer = document.getElementById('stackIndicators');
+  let activeIndex = 0;
+  let intervalStack;
+
+  function updateStack() {
+    cards.forEach((card, i) => {
+      const offset = (i - activeIndex + cards.length) % cards.length;
+      if (offset === 0) {
+        card.style.transform = `translateX(0px) translateY(0px) scale(1)`;
+        card.style.opacity = '1';
+        card.style.zIndex = '3';
+      } else if (offset === 1) {
+        card.style.transform = `translateX(12px) translateY(20px) scale(0.96)`;
+        card.style.opacity = '0.85';
+        card.style.zIndex = '2';
+      } else {
+        card.style.transform = `translateX(24px) translateY(40px) scale(0.92)`;
+        card.style.opacity = '0.7';
+        card.style.zIndex = '1';
+      }
+    });
+    // Atualizar indicadores
+    const dots = document.querySelectorAll('.indicator-dot');
+    dots.forEach((dot, idx) => {
+      if (idx === activeIndex) dot.classList.add('active');
+      else dot.classList.remove('active');
+    });
+  }
+
+  function nextCard() {
+    activeIndex = (activeIndex + 1) % cards.length;
+    updateStack();
+  }
+
+  function createIndicators() {
+    cards.forEach((_, idx) => {
+      const dot = document.createElement('div');
+      dot.classList.add('indicator-dot');
+      if (idx === activeIndex) dot.classList.add('active');
+      dot.addEventListener('click', () => {
+        activeIndex = idx;
+        updateStack();
+        resetStackInterval();
+      });
+      indicatorsContainer.appendChild(dot);
+    });
+  }
+
+  function resetStackInterval() {
+    if (intervalStack) clearInterval(intervalStack);
+    intervalStack = setInterval(nextCard, 5000);
+  }
+
+  if (cards.length) {
+    createIndicators();
+    updateStack();
+    resetStackInterval();
+  }
+
+  // Mobile menu
+  const mobileIcon = document.getElementById('mobileMenuIcon');
+  const navMenu = document.getElementById('navMenu');
+  mobileIcon?.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    const icon = mobileIcon.querySelector('i');
+    if (navMenu.classList.contains('active')) icon.classList.replace('fa-bars', 'fa-times');
+    else icon.classList.replace('fa-times', 'fa-bars');
+  });
+  document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) navMenu.classList.remove('active');
+    });
+  });
+
+  // Scroll header
+  const header = document.querySelector('.header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) header.style.background = 'rgba(14,12,21,0.95)';
+    else header.style.background = 'rgba(14,12,21,0.85)';
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form contato
+  document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Mensagem enviada! Em breve retornaremos.');
+    e.target.reset();
+  });
+
+  // Copiar chave PIX
+  window.copiarChave = () => {
+    navigator.clipboard.writeText('27.105.498/0001-03').then(() => alert('Chave PIX copiada!'));
+  };
+
+  // --- API de Células (exatamente igual à lógica anterior) ---
+  const API_URL = "https://script.google.com/macros/s/AKfycbxnystn3UqAKnfLUgw7tXS8CzrnpxTS0iax80rhMCRs-T47ibodGYvbRw2KRrtsnCzn/exec";
+  const PASTOR_WPP = "5562996231730";
+
+  async function carregarCelulas() {
+    const container = document.getElementById('cellsContainer');
+    if (!container) return;
+    container.innerHTML = '<div><i class="fas fa-spinner fa-pulse"></i> Carregando células...</div>';
+    try {
+      let res = await fetch(API_URL, { cache: "no-store" });
+      let dados = await res.json();
+      if (dados?.dados && Array.isArray(dados.dados)) dados = dados.dados;
+      if (!Array.isArray(dados)) dados = [];
+      if (dados.length === 0) {
+        container.innerHTML = '<div class="cell-card">Nenhuma célula disponível no momento.</div>';
+        return;
+      }
+      container.innerHTML = '';
+      dados.forEach(cell => {
+        const diaRaw = cell.dia || cell.dia_horaio || cell.dia_horario || '';
+        let dia = "Dia a definir";
+        const dias = ["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
+        for (let d of dias) if (diaRaw.includes(d)) { dia = d; break; }
+        if (dia === "Dia a definir" && diaRaw) dia = diaRaw.split(" ")[0];
+        let setor = cell.bairro || "";
+        if (!setor || setor === "Setor") {
+          if (cell.endereco && cell.endereco.includes(" - ")) setor = cell.endereco.split(" - ").pop().trim();
+          else if (cell.endereco) setor = cell.endereco.split(",")[0].trim();
+        }
+        let lider = cell.lider || "Irmão(ã)";
+        if (lider.includes("@")) lider = "Irmão(ã)";
+        const endereco = cell.endereco || "Endereço não informado";
+        const card = document.createElement('div');
+        card.className = 'cell-card';
+        card.innerHTML = `
+          <div class="cell-day">${dia}</div>
+          <div class="cell-sector">📍 ${setor}</div>
+          <div><i class="fas fa-user"></i> ${lider}</div>
+          <div style="font-size:0.75rem; margin-top: 0.5rem;"><i class="fas fa-house"></i> ${endereco}</div>
+          <a href="https://wa.me/${PASTOR_WPP}?text=Olá%20Pastor,%20gostaria%20de%20saber%20mais%20sobre%20a%20célula%20de%20${encodeURIComponent(dia)}%20no%20${encodeURIComponent(setor)}" target="_blank" class="cell-wp-icon"><i class="fab fa-whatsapp"></i></a>
+        `;
+        container.appendChild(card);
+      });
+    } catch (err) {
+      container.innerHTML = '<div class="cell-card">Erro ao carregar células. Tente mais tarde.</div>';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    carregarCelulas();
+    reveals.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible'); });
+  });
+</script>
+</body>
+</html>
