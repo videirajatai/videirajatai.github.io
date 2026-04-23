@@ -364,7 +364,7 @@
             border-left: 6px solid #b8724b;
         }
 
-        /* Horarios e Células */
+        /* Horarios e Células - ESTILO CORRIGIDO */
         .horarios-wrapper {
             display: flex;
             flex-wrap: wrap;
@@ -372,60 +372,82 @@
             justify-content: center;
         }
         .horario-item {
-            background: rgba(255, 245, 235, 0.7);
-            backdrop-filter: blur(8px);
-            border-radius: 32px;
-            padding: 1.5rem 2rem;
-            width: 260px;
-            text-align: center;
-            transition: 0.2s;
-            border: 1px solid #eadbbe;
+            background: white;
+            border-radius: 28px;
+            padding: 1.5rem;
+            width: 280px;
+            transition: 0.25s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            border: 1px solid #f0e4d4;
             display: flex;
             flex-direction: column;
-            gap: 0.6rem;
+            gap: 0.7rem;
         }
-        .horario-item i {
-            font-size: 2rem;
+        .horario-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
+            border-color: #d9b48b;
+        }
+        .card-dia {
+            background: #f9efe3;
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1rem;
+            width: fit-content;
             color: #7c3a6e;
         }
-        .horario-item h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #562a4d;
-        }
-        .horario-item .subdestaque {
-            font-size: 0.9rem;
+        .card-setor {
+            font-size: 1rem;
             font-weight: 600;
             color: #b8724b;
-            background: rgba(255,245,220,0.7);
-            display: inline-block;
+            background: rgba(217,180,139,0.15);
             padding: 0.2rem 0.8rem;
-            border-radius: 50px;
+            border-radius: 30px;
+            width: fit-content;
         }
-        .horario-item p {
-            margin: 0;
+        .card-lider {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             font-size: 0.9rem;
+            color: #2d2a3e;
         }
-        .btn-whatsapp-cell {
-            background-color: #25D366;
-            color: white;
-            border: none;
-            border-radius: 40px;
-            padding: 0.6rem 1rem;
+        .card-lider i {
+            color: #7c3a6e;
+            width: 18px;
+        }
+        .card-endereco {
             font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-            text-decoration: none;
+            color: #6b5a4a;
+            line-height: 1.4;
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+        }
+        .card-endereco i {
+            color: #a17c4b;
+            margin-top: 2px;
+        }
+        .btn-whatsapp-icon {
+            background: #25D366;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            margin-top: 0.5rem;
+            font-size: 1.3rem;
+            color: white;
+            text-decoration: none;
+            transition: 0.2s;
+            margin-top: 0.3rem;
+            align-self: flex-start;
         }
-        .btn-whatsapp-cell:hover {
-            background-color: #128C7E;
-            transform: scale(1.02);
+        .btn-whatsapp-icon:hover {
+            background: #128C7E;
+            transform: scale(1.05);
         }
         .loading-celulas {
             text-align: center;
@@ -751,7 +773,7 @@
         </div>
     </section>
 
-    <!-- SEÇÃO HORÁRIOS + CÉLULAS DINÂMICAS -->
+    <!-- SEÇÃO HORÁRIOS + CÉLULAS CORRIGIDA -->
     <section id="horarios" style="background: linear-gradient(145deg, #fdf7ef, #fffcf5);">
         <div class="container">
             <h2 class="section-title reveal">Programação Semanal</h2>
@@ -759,12 +781,10 @@
             <div class="horarios-wrapper" id="horariosWrapper">
                 <!-- Card FIXO: Culto de Domingo -->
                 <div class="horario-item">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h3>Todo Domingo</h3>
-                    <strong>Culto da Família</strong><br>
-                    <span>18h</span>
+                    <div class="card-dia">Todo Domingo</div>
+                    <div><strong>Culto da Família</strong> • 18h</div>
                 </div>
-                <!-- Os cards das células serão inseridos aqui dinamicamente via API -->
+                <!-- Os cards das células serão inseridos aqui dinamicamente -->
             </div>
             <div class="reveal" style="text-align: center; margin-top: 2rem;">
                 <p><i class="fas fa-map-marker-alt"></i> Av. Veriano de Oliveira Lima, 1067 - Santa Maria, Jataí - GO</p>
@@ -853,18 +873,56 @@
 </footer>
 
 <script>
-    // NÚMERO DO PASTOR GERMERSON (WhatsApp) - Edite conforme necessário
-    const PASTOR_WPP_NUMBER = "5562996231730"; // código do país 55 + DDD 62 + número
+    // NÚMERO DO PASTOR GERMERSON
+    const PASTOR_WPP_NUMBER = "5562996231730";
 
-    // URL da API do Google Script (configurada para retornar células)
+    // URL da API do Google Script
     const API_URL = "https://script.google.com/macros/s/AKfycbxnystn3UqAKnfLUgw7tXS8CzrnpxTS0iax80rhMCRs-T47ibodGYvbRw2KRrtsnCzn/exec";
 
-    // Função para buscar células e renderizar cards
+    // Função auxiliar: extrair apenas o dia da semana (ex: "Quarta" de "Quarta - 19h30" ou "Quarta")
+    function extrairDia(texto) {
+        if (!texto) return "Dia a definir";
+        const dias = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+        for (let dia of dias) {
+            if (texto.includes(dia)) return dia;
+        }
+        // Se vier algo como "Terças 19h30" -> extrai "Terça"
+        const match = texto.match(/(Terça|Quarta|Quinta|Sexta|Sábado|Domingo|Segunda)/i);
+        return match ? match[0] : texto.split(" ")[0];
+    }
+
+    // Extrair setor/bairro do endereço ou do nome da célula
+    function extrairSetor(celula) {
+        // Prioridade: 1. campo bairro (se existir), 2. nome da célula (coluna "nome"), 3. última parte do endereço
+        if (celula.bairro && celula.bairro !== "Setor" && !celula.bairro.includes("Rua")) {
+            return celula.bairro;
+        }
+        // Tenta extrair do nome da célula (ex: "Vila Fátima - Silas" -> "Vila Fátima")
+        if (celula.nome_celula && celula.nome_celula.includes(" - ")) {
+            return celula.nome_celula.split(" - ")[0].trim();
+        }
+        // Fallback: usar a última parte após " - " no endereço
+        if (celula.endereco && celula.endereco.includes(" - ")) {
+            let parte = celula.endereco.split(" - ").pop().trim();
+            if (parte && parte.length > 2) return parte;
+        }
+        // Último recurso: primeira parte do endereço antes da vírgula, ignorando palavras "Rua", "Av", etc.
+        if (celula.endereco) {
+            let primeira = celula.endereco.split(",")[0].trim();
+            let palavrasIgnorar = ["Rua", "Av", "Avenida", "Alameda", "Travessa"];
+            let partesPrimeira = primeira.split(" ");
+            if (partesPrimeira.length > 1 && palavrasIgnorar.includes(partesPrimeira[0])) {
+                return partesPrimeira.slice(1).join(" ");
+            }
+            return primeira;
+        }
+        return "Setor";
+    }
+
     async function carregarCelulas() {
         const wrapper = document.getElementById("horariosWrapper");
         if (!wrapper) return;
 
-        // Adiciona indicador de carregamento (apenas visual, não bloqueia)
         const loadingDiv = document.createElement("div");
         loadingDiv.className = "loading-celulas";
         loadingDiv.id = "loadingCellsMsg";
@@ -878,57 +936,41 @@
                 cache: "no-store"
             });
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            const dados = await response.json();
+            let dados = await response.json();
             
-            // Remover mensagem de loading
             const loadingMsg = document.getElementById("loadingCellsMsg");
             if (loadingMsg) loadingMsg.remove();
 
-            // Espera-se que a API retorne um array de objetos com as colunas: lider, dia_horaio, endereco (e opcional: bairro)
-            if (Array.isArray(dados) && dados.length > 0) {
+            // Se a API retornar objeto com array dentro (ex: {dados: [...]}), extrai
+            if (dados && dados.dados && Array.isArray(dados.dados)) {
+                dados = dados.dados;
+            }
+            if (!Array.isArray(dados)) dados = [];
+
+            if (dados.length > 0) {
                 dados.forEach(celula => {
+                    // Garante campos (compatibilidade com diferentes retornos)
+                    const diaRaw = celula.dia || celula.dia_horaio || celula.dia_horario || "";
+                    const dia = extrairDia(diaRaw);
+                    const setor = extrairSetor(celula);
+                    let lider = celula.lider || celula.lider_nome || "Irmão(ã)";
+                    // Se lider tiver "@", ignora (fallback)
+                    if (lider.includes("@")) lider = "Irmão(ã)";
+                    const endereco = celula.endereco || "Endereço não informado";
+
                     const card = document.createElement("div");
                     card.className = "horario-item";
 
-                    // Ícone decorativo
-                    const icon = document.createElement("i");
-                    icon.className = "fas fa-users";
-                    card.appendChild(icon);
-
-                    // Destaque principal: dia/horário
-                    const titulo = document.createElement("h3");
-                    titulo.textContent = celula.dia_horaio || "Dia a definir";
-                    card.appendChild(titulo);
-
-                    // Subdestaque: bairro/setor (se existir, senão usa parte do endereço)
-                    let bairroTexto = celula.bairro || (celula.endereco ? celula.endereco.split(',')[0] : "Setor");
-                    const sub = document.createElement("div");
-                    sub.className = "subdestaque";
-                    sub.textContent = bairroTexto.length > 30 ? bairroTexto.substring(0,28)+"..." : bairroTexto;
-                    card.appendChild(sub);
-
-                    // Nome do líder
-                    const liderP = document.createElement("p");
-                    liderP.innerHTML = `<strong>🧑‍🤝‍🧑 Líder:</strong> ${celula.lider || "Irmão(a)"}`;
-                    card.appendChild(liderP);
-
-                    // Endereço completo
-                    const endP = document.createElement("p");
-                    endP.innerHTML = `<i class="fas fa-location-dot"></i> ${celula.endereco || "Endereço não informado"}`;
-                    card.appendChild(endP);
-
-                    // Botão WhatsApp do Pastor
-                    const wppLink = document.createElement("a");
-                    wppLink.href = `https://wa.me/${PASTOR_WPP_NUMBER}?text=Olá%20Pastor,%20gostaria%20de%20saber%20mais%20sobre%20a%20célula%20de%20${encodeURIComponent(titulo.textContent)}%20no%20bairro%20${encodeURIComponent(bairroTexto)}`;
-                    wppLink.target = "_blank";
-                    wppLink.className = "btn-whatsapp-cell";
-                    wppLink.innerHTML = '<i class="fab fa-whatsapp"></i> Contato do Pastor';
-                    card.appendChild(wppLink);
-
+                    card.innerHTML = `
+                        <div class="card-dia">${dia}</div>
+                        <div class="card-setor"><i class="fas fa-map-pin"></i> ${setor}</div>
+                        <div class="card-lider"><i class="fas fa-user"></i> ${lider}</div>
+                        <div class="card-endereco"><i class="fas fa-location-dot"></i> <span>${endereco}</span></div>
+                        <a href="https://wa.me/${PASTOR_WPP_NUMBER}?text=Olá%20Pastor,%20gostaria%20de%20saber%20mais%20sobre%20a%20célula%20de%20${encodeURIComponent(dia)}%20no%20setor%20${encodeURIComponent(setor)}" target="_blank" class="btn-whatsapp-icon"><i class="fab fa-whatsapp"></i></a>
+                    `;
                     wrapper.appendChild(card);
                 });
             } else {
-                // Se não houver células, exibe mensagem amigável
                 const semCelulas = document.createElement("div");
                 semCelulas.className = "horario-item";
                 semCelulas.style.width = "100%";
@@ -947,26 +989,31 @@
         }
     }
 
-    // Mobile menu
+    // Mobile menu (igual ao original)
     const mobileIcon = document.getElementById('mobileMenuIcon');
     const navMenu = document.getElementById('navMenu');
-    mobileIcon.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        const icon = mobileIcon.querySelector('i');
-        if(navMenu.classList.contains('active')) {
-            icon.classList.remove('fa-bars');
-            icon.classList.add('fa-times');
-        } else {
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-        }
-    });
+    if (mobileIcon) {
+        mobileIcon.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = mobileIcon.querySelector('i');
+            if(navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    }
     document.querySelectorAll('.nav-menu a').forEach(link => {
         link.addEventListener('click', () => {
             if(window.innerWidth <= 980) {
                 navMenu.classList.remove('active');
-                mobileIcon.querySelector('i').classList.remove('fa-times');
-                mobileIcon.querySelector('i').classList.add('fa-bars');
+                const icon = mobileIcon?.querySelector('i');
+                if(icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
             }
         });
     });
@@ -992,11 +1039,13 @@
 
     // Form contato
     const form = document.getElementById('contactForm');
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert(`🙏 Obrigado, ${document.getElementById('nome').value || 'visitante'}! Sua mensagem foi enviada. Deus abençoe!`);
-        form.reset();
-    });
+    if(form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert(`🙏 Obrigado, ${document.getElementById('nome').value || 'visitante'}! Sua mensagem foi enviada. Deus abençoe!`);
+            form.reset();
+        });
+    }
 
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1018,7 +1067,6 @@
         .catch(() => alert('Copie manualmente: ' + chave));
     };
 
-    // Carregar células dinâmicas após o DOM
     document.addEventListener("DOMContentLoaded", () => {
         carregarCelulas();
     });
