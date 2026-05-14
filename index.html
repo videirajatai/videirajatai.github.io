@@ -1575,6 +1575,22 @@ document.addEventListener("DOMContentLoaded", function() {
     carregarCelulas();
     atualizarLinkPalavra();
 });
+
+
+        // Função para registrar acesso no contador
+function registrarAcesso(pagina) {
+  var urlGAS = API_URL;
+  // Usamos ?contador=principal ou ?contador=encontro
+  fetch(urlGAS + "?contador=" + pagina, { method: "GET", mode: "no-cors" })
+    .catch(erro => console.warn("Erro ao registrar acesso:", erro));
+}
+
+// Executa ao carregar a página
+document.addEventListener("DOMContentLoaded", function() {
+  // Detecta qual página está sendo acessada
+  var pagina = window.location.pathname.includes("encontro") ? "encontro" : "principal";
+  registrarAcesso(pagina);
+});
     </script>
 </body>
 </html>
